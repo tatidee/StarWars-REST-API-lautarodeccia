@@ -74,7 +74,7 @@ def get_planets():
         if results_query:
             response_body = {
             "msg": "Ok",
-            "results": results_query.serialize()
+            "results": results
             }
             return jsonify(response_body), 200
         return jsonify({"msg": "No hay planetas"}), 404
