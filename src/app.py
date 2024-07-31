@@ -12,7 +12,7 @@ from models import db, User, Planet, Favorite, Vehicle, Character
 from sqlalchemy import and_
 from models import db, User, Planet, Favorite, Vehicle, Character
 from sqlalchemy import and_
-
+#se me dificulto el commit y le puse otro nombre, esta linea es para poder cambiarle el nombre al commit
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
