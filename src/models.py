@@ -150,30 +150,3 @@ class Character(db.Model):
             "is_active": self.is_active,
         }
     
-class Character(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(250), nullable=False)
-    height = db.Column(db.Integer)
-    mass = db.Column(db.Integer)
-    hair_color = db.Column(db.String(50))
-    skin_color = db.Column(db.String(50))
-    eye_color = db.Column(db.String(50))
-    birth_year = db.Column(db.String(50))
-    gender = db.Column(db.String(10))
-    like = db.Column(db.Boolean)
-    favorite = db.relationship('Favorite', backref='character', lazy=True)
-    def __repr__(self):
-        return '<Character %r>' % self.id
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "height": self.height,
-            "mass": self.mass,
-            "hair_color": self.hair_color,
-            "skin_color": self.skin_color,
-            "eye_color": self.eye_color,
-            "birth_year": self.birth_year,
-            "gender": self.gender,
-            "like": self.like,
-        }
