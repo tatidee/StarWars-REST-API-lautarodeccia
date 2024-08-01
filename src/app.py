@@ -157,6 +157,36 @@ def get_planet(id):
         return jsonify({"msg": "No existe ese planeta"}), 404
     except Exception as e:
         return jsonify({"msg": str(e)}), 500 
+#AGREGAR PLANETA
+@app.route('/planet', methods=['POST'])
+def create_planet():
+    try:
+        data = request.get_json()
+        existing_planet = Planet.query.filter_by(name=data["name"]).first()
+        
+        if existing_planet:
+            return jsonify({"msg": "Planet already exists"}), 400
+
+        planet_created = Planet(
+            name=data["name"], 
+            climate=data["climate"], 
+            diameter=data["diameter"], 
+            gravity=data["gravity"], 
+            orbital_period=data["orbital_period"], 
+            population=data["population"], 
+            rotation_period=data["rotation_period"], 
+            surface_water=data["surface_water"], 
+            terrain=data["terrain"],
+            like=data["like"],
+        )
+        db.session.add(planet_created)
+        db.session.commit()
+        response_body = {
+            "msg": "Planet created successfully",
+        }
+        return jsonify(response_body), 200
+    except Exception as e:
+        return jsonify({"msg": str(e)}), 500
 #DELETE PLANET by id
 @app.route('/planet/<int:id>', methods=['DELETE'])
 def delete_planet(id):
@@ -238,6 +268,36 @@ def get_character(id):
         return jsonify({"msg": "Personaje no encontrado"}), 404
     except Exception as e:
         return jsonify({"msg": str(e)}), 500
+#Agregar character 
+@app.route('/character', methods=['POST'])
+def create_character():
+    try:
+        data = request.get_json()
+        existing_character = Character.query.filter_by(name=data["name"]).first()
+        
+        if existing_character:
+            return jsonify({"msg": "Character already exists"}), 400
+
+        character_created = Character(
+            name=data["name"], 
+            height=data["height"], 
+            mass=data["mass"], 
+            hair_color=data["hair_color"], 
+            skin_color=data["skin_color"], 
+            eye_color=data["eye_color"], 
+            birth_year=data["birth_year"], 
+            gender=data["gender"],
+            like=data["like"],
+            is_active=data["is_active"]
+        )
+        db.session.add(character_created)
+        db.session.commit()
+        response_body = {
+            "msg": "Character created successfully",
+        }
+        return jsonify(response_body), 200
+    except Exception as e:
+        return jsonify({"msg": str(e)}), 500
 #delete character
 @app.route('/character/<int:id>', methods=['DELETE'])
 def delete_character(id):
@@ -312,6 +372,37 @@ def get_vehicle(id):
             }
             return jsonify(response_body), 200
         return jsonify({"msg": "Vehículo no encontrado"}), 404
+    except Exception as e:
+        return jsonify({"msg": str(e)}), 500
+#Agregar vehículo
+@app.route('/vehicle', methods=['POST'])
+def create_vehicle():
+    try:
+        data = request.get_json()
+        existing_vehicle = Vehicle.query.filter_by(name=data["name"]).first()
+        
+        if existing_vehicle:
+            return jsonify({"msg": "Vehicle already exists"}), 400
+
+        vehicle_created = Vehicle(
+            name=data["name"], 
+            model=data["model"], 
+            manufacturer=data["manufacturer"], 
+            cost_in_credits=data["cost_in_credits"], 
+            length=data["length"], 
+            max_atmosphering_speed=data["max_atmosphering_speed"], 
+            crew=data["crew"], 
+            passengers=data["passengers"], 
+            cargo_capacity=data["cargo_capacity"], 
+            consumables=data["consumables"],
+            like=data["like"],
+        )
+        db.session.add(vehicle_created)
+        db.session.commit()
+        response_body = {
+            "msg": "Vehicle created successfully",
+        }
+        return jsonify(response_body), 200
     except Exception as e:
         return jsonify({"msg": str(e)}), 500
 #Eliminar Vehículo
