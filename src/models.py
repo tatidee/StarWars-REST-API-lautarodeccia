@@ -132,6 +132,7 @@ class Character(db.Model):
     birth_year = db.Column(db.String(50))
     gender = db.Column(db.String(10))
     like = db.Column(db.Boolean)
+    is_active = db.Colunb(db.Boolean)
     favorite = db.relationship('Favorite', backref='character', lazy=True)
     def __repr__(self):
         return '<Character %r>' % self.id
